@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Add from "../images/add.png";
+import Default from "../images/default.jpg";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -23,7 +24,6 @@ const Register = () => {
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
       //Create a unique image name
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
@@ -77,7 +77,7 @@ const Register = () => {
           </label>
           <button disabled={loading}>Sign up</button>
           <p>You do have an account? <Link to="/Login">Login</Link></p>
-          {loading && "Uploading and compressing the image please wait..."}
+          {loading && "Signing up... please wait..."}
           {err && <span className="error-msg">Something went wrong</span>}
         </form>
         
